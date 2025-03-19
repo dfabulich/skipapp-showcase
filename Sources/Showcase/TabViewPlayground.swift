@@ -110,7 +110,7 @@ struct TabPageViewContentView: View {
                         .resizable()
                         .background(.red)
                 }
-                .aspectRatio(2, contentMode: .fill)
+                .aspectRatio(3/2, contentMode: .fill)
                 TabView {
                     Rectangle()
                         .fill(.mint)
