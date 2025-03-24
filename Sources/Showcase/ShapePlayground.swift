@@ -117,6 +117,14 @@ struct ShapePlayground: View {
                     .frame(width: 100, height: 100)
                     .border(.blue)
                 }
+                HStack {
+                    Text("clipShape")
+                    Spacer()
+                    Color.black
+                        .frame(width: 100, height: 100)
+                        .clipShape(.rect(topLeadingRadius: 10, bottomLeadingRadius: 20, bottomTrailingRadius: 30, topTrailingRadius: 40))
+                        .border(.blue)
+                }
                 Text("Custom").font(.title).bold()
                 HStack {
                     Text("Fill")
