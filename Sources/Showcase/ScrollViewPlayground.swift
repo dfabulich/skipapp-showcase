@@ -10,6 +10,7 @@ enum ScrollViewPlaygroundType: String, CaseIterable {
     case readerStaticList
     case readerLazyVGrid
     case readerLazyHGrid
+    case buggy
 
     var title: String {
         switch self {
@@ -29,6 +30,8 @@ enum ScrollViewPlaygroundType: String, CaseIterable {
             return "ScrollViewReader: LazyVGrid"
         case .readerLazyHGrid:
             return "ScrollViewReader: LazyHGrid"
+        case .buggy:
+            return "Buggy"
         }
     }
 }
@@ -67,6 +70,9 @@ struct ScrollViewPlayground: View {
             case .readerLazyHGrid:
                 ScrollViewReaderLazyHGridPlayground()
                     .navigationTitle($0.title)
+            case .buggy:
+                ScrollViewReaderBuggyPlayground()
+                    .navigationTitle($0.title)
             }
         }
     }
@@ -96,6 +102,21 @@ private struct HorizontalScrollViewPlayground: View {
                     Text("View: \(i)")
                         .padding()
                 }
+            }
+        }
+    }
+}
+
+private struct ScrollViewReaderBuggyPlayground: View {
+    var body: some View {
+        ScrollView(.vertical) {
+            VStack {
+                ScrollView(.horizontal) {
+                    LazyHStack {
+                        Text("Hello")
+                    }
+                }
+                Spacer()
             }
         }
     }
