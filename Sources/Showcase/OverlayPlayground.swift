@@ -45,6 +45,18 @@ struct OverlayPlayground: View {
                         .border(.blue)
                 }
                 HStack {
+                    Text("Deprecated syntax")
+                    Spacer()
+                    Text("Hello")
+                        .padding()
+                        .overlay(
+                            Circle()
+                                .fill(.red.opacity(0.5))
+                                .frame(width: 100, height: 100)
+                        )
+                        .border(.blue)
+                }
+                HStack {
                     Text(".clipped()")
                     Spacer()
                     Text("Hello")
@@ -102,4 +114,8 @@ struct OverlayPlayground: View {
             PlaygroundSourceLink(file: "OverlayPlayground.swift")
         }
     }
+}
+
+#Preview {
+    OverlayPlayground()
 }
