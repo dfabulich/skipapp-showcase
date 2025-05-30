@@ -3,6 +3,7 @@ import SwiftUI
 
 struct TransitionPlayground: View {
     @State var count = 0
+    @State var removableViews: [Int] = Array(0..<3)
 
     var body: some View {
         ScrollView {
@@ -301,6 +302,29 @@ struct TransitionPlayground: View {
                     withAnimation { updateCount() }
                 }
                 .buttonStyle(.bordered)
+                HStack {
+                    Text("Removable views")
+                    Spacer()
+                    HStack {
+                        ForEach(removableViews, id: \.self) { i in
+                            Color.red
+                                .frame(width: 20, height: 20)
+                                .id(i + 1)
+                                .onTapGesture {
+                                    withAnimation {
+                                        removableViews.removeAll { $0 == i }
+                                    }
+                                }
+                        }
+                    }
+                    .frame(width: 100, height: 100)
+                    .background(.gray)
+                }
+                Button("reset removeables") {
+                    withAnimation {
+                        removableViews = Array(0..<3)
+                    }
+                }
             }
             .padding()
         }
