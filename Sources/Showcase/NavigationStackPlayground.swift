@@ -190,6 +190,21 @@ struct PathElementView: View {
     }
 }
 
+/// Slow recomposition so the detail toolbar back button stays tappable during pop (repro aid only).
+private struct ReproRenderBusyWaitView: View {
+    init() {
+        #if SKIP
+        let deadline = Date().addingTimeInterval(0.2)
+        while Date() < deadline {
+        }
+        #endif
+    }
+
+    var body: some View {
+        EmptyView()
+    }
+}
+
 struct NavigationPathElementView: View {
     @Environment(\.dismiss) var dismiss
     let element: PathElement
@@ -197,6 +212,7 @@ struct NavigationPathElementView: View {
 
     var body: some View {
         VStack(spacing: 16) {
+            ReproRenderBusyWaitView()
             Text("Path count: \(path.count)")
             NavigationLink("Navigate forward", value: PathElement(rawValue: path.count + 1))
             if !path.isEmpty {
